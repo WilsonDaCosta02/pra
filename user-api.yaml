@@ -1,0 +1,78 @@
+openapi: '3.0.3'
+info:
+  title: Pratikum rest API
+  version: '1.0'
+servers:
+  - url: https://loaclhost:3000
+
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        age:
+          type: integer
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+
+paths:
+  /users:
+    get:
+      description: 'endpoint untuk mendapatkan semua data user'
+      parameters: []
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            application/json:
+            schemas:
+             type: array
+             items: 
+              $ref: "#/components/schemas/user"
+              '500':
+               description: Server Gagal
+              '403':
+               description: Tidak Dijalankan
+  /users/{id}:
+    get:
+      description: 'endpoint untuk mendapatkan data user berdasarkan id'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schemas:
+            type: integer
+      responses:
+        '200':
+        description: Berhasil
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/user'
+        '500':
+          desciprion: Server Gagal
+        '403':
+          description: Tidak diijinkan
+  delete: 
+    desciprion: 'endpoint untuk menghapus data user berdasarkan id'
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+     '200':
+      desciprion: Berhasil
+      '500':
+      desciprion: Server Gagal
+      '403':
+      desciprion: Tidak diijinkan
