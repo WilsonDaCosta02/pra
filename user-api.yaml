@@ -1,13 +1,13 @@
 openapi: '3.0.3'
 info:
-  title: Pratikum rest API
+  title: Praktikum REST API
   version: '1.0'
 servers:
-  - url: https://loaclhost:3000
+  - url: https://localhost:3000
 
 components:
   schemas:
-    user:
+    User:
       type: object
       properties:
         id:
@@ -26,53 +26,54 @@ components:
 paths:
   /users:
     get:
-      description: 'endpoint untuk mendapatkan semua data user'
-      parameters: []
+      description: Endpoint untuk mendapatkan semua data user
       responses:
         '200':
           description: Berhasil
           content:
             application/json:
-            schemas:
-             type: array
-             items: 
-              $ref: "#/components/schemas/user"
-              '500':
-               description: Server Gagal
-              '403':
-               description: Tidak Dijalankan
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/User"
+        '500':
+          description: Server Gagal
+        '403':
+          description: Tidak diizinkan
+
   /users/{id}:
     get:
-      description: 'endpoint untuk mendapatkan data user berdasarkan id'
+      description: Endpoint untuk mendapatkan data user berdasarkan ID
       parameters:
         - name: id
           in: path
           required: true
-          schemas:
+          schema:
             type: integer
       responses:
         '200':
-        description: Berhasil
-        content:
-          application/json:
-            schema: 
-              $ref: '#/components/schemas/user'
+          description: Berhasil
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/User'
         '500':
-          desciprion: Server Gagal
+          description: Server Gagal
         '403':
-          description: Tidak diijinkan
-  delete: 
-    desciprion: 'endpoint untuk menghapus data user berdasarkan id'
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-    responses:
-     '200':
-      desciprion: Berhasil
-      '500':
-      desciprion: Server Gagal
-      '403':
-      desciprion: Tidak diijinkan
+          description: Tidak diizinkan
+
+    delete:
+      description: Endpoint untuk menghapus data user berdasarkan ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Berhasil
+        '500':
+          description: Server Gagal
+        '403':
+          description: Tidak diizinkan
